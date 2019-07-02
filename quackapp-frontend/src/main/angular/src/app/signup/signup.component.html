@@ -1,0 +1,46 @@
+<div class="row clearfix">
+  <div class="col-md-4 column">
+  </div>
+  <div class="col-md-4 column">
+      <a href="#" routerLink="/login">Already registered? Log in</a>
+      <form role="form" (submit)="signUp($event)">
+          <div class="form-group">
+               <label for="inputUserEmail">Email address</label><input class="form-control" id="inputUserEmail" type="email" [(ngModel)]="email" placeholder="youremailaddress@xx.xxx"/>
+          </div>
+
+          <div class="form-group">
+               <label for="inputUserPassword">Password</label><input class="form-control" id="inputUserPassword" type="password" [(ngModel)]="password" placeholder="Enter the password here"/>
+          </div>
+
+          <div class="form-group">
+            <label for="inputRePassword">Re-enter Password</label><input class="form-control" id="inputRePassword" type="password" placeholder="Enter the password again"/>
+          </div>
+
+          <div class="form-group">
+            <label for="inputUserNickname">Nickname</label>
+              <input type="text" class="form-control" id="inputUserNickname" [(ngModel)]="username"
+                name="inputUserNickname" placeholder="Pick your own quack name">
+          </div>
+
+          <div class="form-group">
+            <label for="inputUserGender">Gender</label>
+              &nbsp; &nbsp;<input type="radio" name="inputUserGender" id="gender_m" value="male"
+                checked="checked"> &nbsp;Male &nbsp; &nbsp; &nbsp; &nbsp;
+              &nbsp; &nbsp;<input type="radio" name="inputUserGender" id="gender_f" value="female">
+              &nbsp;Female
+          </div>
+
+          <div class="checkbox">
+            <label><input type="checkbox" /> &nbsp;I agree to the Terms and Conditions</label>
+          </div>
+          
+          <div class="form-group">
+            <button type="submit" class="btn btn-warning btn-lg btn-block">Sign up</button>
+          </div>
+          
+          
+      </form>
+  </div>
+  <!--<div class="col-md-4 column">
+  </div>-->
+</div>

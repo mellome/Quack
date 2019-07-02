@@ -1,0 +1,21 @@
+
+<div class="container post-container">
+      <div class="row">
+          <h2 class="col-12">Quack Quack Quack </h2>
+          <div class="user-info">
+              <div class="col-5"><img src="assets/img/user.png" class="img-circle " style="max-width:100%" alt="Sample Image"></div>
+              <input class="col-5" class="form-control usernam" [(ngModel)]="title" type="text" />
+          </div>
+      </div>
+
+      <div class="col-12 form-group">
+          <label for="comment">Text:</label>
+          <textarea class="form-control quack-text" rows="5" [(ngModel)]="text" id="comment"></textarea>
+
+          <div class="checkbox">
+                <label><input type="checkbox"> only me </label>
+          </div>
+          <button type="submit" class="btn btn-success float-right quack-submit"> Quacken </button>
+      </div>
+
+</div>
