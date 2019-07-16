@@ -26,7 +26,7 @@
               </thead>
               <tbody>
                 <tr *ngFor="let profile of userProfiles">
-                  <td>{{profile.userId}}</td>
+                  <td><a routerLink="/profile" [queryParams]="{id: profile.userId}">{{profile.userId}}</a></td>
                   <td>{{profile.username}}</td>
                   <td>{{profile.creationDate.toLocaleDateString('de-DE', {day: '2-digit', month: '2-digit', year: 'numeric'})}}</td>
                   <td *ngIf="profile.lastActiveDate !== undefined">{{profile.lastActiveDate.toLocaleDateString('de-DE', {day: '2-digit', month: '2-digit', year: 'numeric'})}}</td>
@@ -34,9 +34,6 @@
                 </tr>
               </tbody>
             </table>
-      </div>
-      <div class="panel-footer">
-        Ende der User-Liste
       </div>
     </div>
   </div>
@@ -66,6 +63,7 @@
                   <th>
                     Sichtbarkeit
                   </th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -78,15 +76,16 @@
                   <td>{{quack.date.toLocaleDateString('de-DE', {day: '2-digit', month: '2-digit', year: 'numeric'})}}</td>
                   <td *ngIf="quack.publiclyVisible">öffentlich</td>
                   <td *ngIf="!quack.publiclyVisible">beschränkt</td>
+                  <td>
+                    <a [routerLink]="['/edit-quack',quack.id]"><i class="fa fa-edit"></i></a>
+                    <a [routerLink]="['/delete-quack',quack.id]"><i class="fa fa-trash"></i></a>
+                  </td>
                 </tr>
               </tbody>
             </table>
-      </div>
-      <div class="panel-footer">
-        Ende der Quack-Liste
       </div>
     </div>
   </div>
 
 </div>
-<div style="height:150px;"></div> 
+<div style="height:150px;"></div>

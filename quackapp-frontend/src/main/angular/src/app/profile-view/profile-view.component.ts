@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Profile } from './Profile';
 import {QuackRService} from "../quackr.service";
 import {ActivatedRoute} from "@angular/router";
@@ -9,21 +9,29 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./profile-view.component.css'],
   providers: [QuackRService]
 })
-export class ProfileViewComponent implements OnInit {
+export class ProfileViewComponent {
 
   profile: Profile;
+  editable: boolean = false;
 
   constructor(private route: ActivatedRoute, protected qService: QuackRService) {
       this.route.queryParams.subscribe(params => {
           let id = +params['id'] || 0;
           if (id > 0) {
               this.loadProfile(id);
+              this.qService.getLoggedInUser().subscribe(
+                  user => this.editable = user.id == id || user.admin
+              );
+          } else {
+              this.qService.getLoggedInUser().subscribe(
+                  user => {
+                      this.profile = Profile.fromUser(user);
+                      this.editable = true;
+                  },
+                  () => {}
+              );
           }
       });
-  }
-
-  ngOnInit() {
-
   }
 
   loadProfile(id: number): void {

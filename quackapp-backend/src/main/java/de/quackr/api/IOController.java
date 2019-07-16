@@ -1,5 +1,7 @@
 package de.quackr.api;
 
+import de.quackr.persistence.entities.Comment;
+import de.quackr.persistence.entities.Comment_;
 import de.quackr.persistence.entities.Quack;
 import de.quackr.persistence.entities.Quack_;
 import de.quackr.persistence.entities.User;
@@ -39,15 +41,15 @@ public class IOController {
         Root<User> e = update.from(User.class);
 
         // set update and where clause
-        update.set(User_.username, user.getUsername());
-        update.set(User_.email, user.getEmail());
-        update.set(User_.passwordHash, user.getPasswordHash());
-        update.set(User_.realName, user.getRealName());
-        update.set(User_.birthday, user.getBirthday());
-        update.set(User_.signUpTimestamp, user.getSignUpTimestamp());
-        update.set(User_.lastActiveTimestamp, user.getLastActiveTimestamp());
-        update.set(User_.admin, user.isAdmin());
-        update.set(User_.moderator, user.isModerator());
+        if (user.getUsername() != null)             update.set(User_.username, user.getUsername());
+        if (user.getEmail() != null)                update.set(User_.email, user.getEmail());
+        if (user.getPasswordHash() != null)         update.set(User_.passwordHash, user.getPasswordHash());
+        if (user.getRealName() != null)             update.set(User_.realName, user.getRealName());
+        if (user.getBirthday() != null)             update.set(User_.birthday, user.getBirthday());
+        if (user.getLastActiveTimestamp() != null)  update.set(User_.lastActiveTimestamp, user.getLastActiveTimestamp());
+
+//        update.set(User_.moderator, user.isModerator());
+
         update.where(cb.equal(e.get(User_.id), id));
 
         // perform update
@@ -119,12 +121,10 @@ public class IOController {
         Root<Quack> root = update.from(Quack.class);
 
         // set update and where clause
-        update.set(Quack_.author, quack.getAuthor());
         update.set(Quack_.title, quack.getTitle());
         update.set(Quack_.text, quack.getText());
         update.set(Quack_.date, quack.getDate());
         update.set(Quack_.publiclyVisible, quack.isPubliclyVisible());
-        update.set(Quack_.backgroundColor, quack.getBackgroundColor());
         update.where(cb.equal(root.get(Quack_.id), id));
 
         // perform update
@@ -187,6 +187,54 @@ public class IOController {
         TypedQuery<Quack> q = entityManager.createQuery(cq);
         List<Quack> allQuacks = q.getResultList();
         return allQuacks;
+    }
+
+    public List<Quack> getAllPublicQuacks() {
+        final CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        final CriteriaQuery<Quack> cq = cb.createQuery(Quack.class);
+        final Root<Quack> quack = cq.from(Quack.class);
+
+        final Predicate predicate = cb.isTrue(quack.get(Quack_.publiclyVisible));
+
+        cq.select(quack).where(predicate);
+
+        return entityManager.createQuery(cq).getResultList();
+    }
+
+// Hier fängt mit allen Comment Methoden an!!!
+
+
+    public void createComment(Comment newComment) {
+        this.entityManager.persist(newComment);
+    }
+
+    public List<Comment> getAllCommentsFor(long id) {
+    	CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+    	CriteriaQuery<Comment> cq = cb.createQuery(Comment.class);
+        Root<Comment> comment = cq.from(Comment.class);
+
+        final Predicate predicate = cb.equal(comment.get(Comment_.qid), id);
+
+        cq.select(comment).where(predicate);
+        TypedQuery<Comment> c = entityManager.createQuery(cq);
+        List<Comment> allComments = c.getResultList();
+        return allComments;
+	}
+
+    public void deleteComment(long id) {
+        CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
+
+        // create delete
+        CriteriaDelete<Comment> delete = cb.createCriteriaDelete(Comment.class);
+
+        // set root class
+        Root<Comment> e = delete.from(Comment.class);
+
+        // set where clause
+        delete.where(cb.equal(e.get(Comment_.id), id));
+
+        // perform delete
+        this.entityManager.createQuery(delete).executeUpdate();
     }
 
 }

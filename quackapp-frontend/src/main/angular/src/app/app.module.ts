@@ -11,10 +11,13 @@ import { ProfileViewComponent } from './profile-view/profile-view.component';
 import { PostComponent } from './post/post.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-import {QuackRService} from "./quackr.service";
+import {QuackRService} from './quackr.service';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
-import {FormsModule} from "@angular/forms";
-import {AuthenticationService} from "./authentication.service";
+import {FormsModule} from '@angular/forms';
+import {AuthenticationService} from './authentication.service';
+import { EditQuackComponent } from './edit-quack/edit-quack.component';
+import { DeleteQuackComponent } from './delete-quack/delete-quack.component';
+import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 
 
 @NgModule({
@@ -27,17 +30,21 @@ import {AuthenticationService} from "./authentication.service";
     PostComponent,
     LoginComponent,
     SignupComponent,
-    AdminPanelComponent
+    AdminPanelComponent,
+    EditQuackComponent,
+    DeleteQuackComponent,
+    ProfileEditComponent,
   ],
-    imports: [
-        NgbModule.forRoot(),
-        BrowserModule,
-        AppRoutingModule,
-        UiModule,
-        HttpClientModule,
-        FormsModule
-    ],
+  entryComponents: [QuacksModalContent],
+  imports: [
+      NgbModule.forRoot(),
+      BrowserModule,
+      AppRoutingModule,
+      UiModule,
+      HttpClientModule,
+      FormsModule
+  ],
   providers: [QuackRService, AuthenticationService],
-  bootstrap: [AppComponent, QuacksModalContent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

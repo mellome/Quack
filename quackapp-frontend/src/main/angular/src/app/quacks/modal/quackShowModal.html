@@ -19,8 +19,15 @@
     </div>
 
     <div class="col-5">
-      <h5 class="quack-comments-header">40 Kommentare</h5>
-      <app-comments quackId="{{id}}"></app-comments>
+      <h5 class="quack-comments-header">{{comments.length}} Kommentare</h5>
+
+      <form role="form" *ngIf="userLogged" (submit)="saveComment($event)">
+        <div class="form-group">
+          <label for="inputNewComment">Dein Kommentar:</label><input type="text" class="form-control" id="inputNewComment" name="inputNewComment"  [(ngModel)]="newComment"/>        </div>
+        <button type="submit" class="btn btn-primary" align="right">Abschicken</button>
+      </form>
+
+      <app-comments [comments]="comments"></app-comments>
     </div>
   </div>
 </div>

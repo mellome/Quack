@@ -1,28 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
 import {AuthenticationService} from "../authentication.service";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
-    providers: [AuthenticationService]
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
-    username: string;
-    password: string;
+export class LoginComponent {
+    public username: string = "";
+    public password: string = "";
 
-  constructor(private authService: AuthenticationService, private router: Router) { }
+    errorMessage: string;
 
-  ngOnInit() {
-  }
+    constructor(private authService: AuthenticationService, private router: Router) {
+    }
 
-  login(e: Event) {
-      e.preventDefault();
-      this.authService.requestToken(this.username, this.password).subscribe(
-          () => this.router.navigate(['/home']),
-          () => {}
-      );
-  }
+    login(e: Event): void {
+        e.preventDefault();
+        this.errorMessage = null;
+        this.authService.requestToken(this.username, this.password).subscribe(
+            () => this.router.navigate(['/home']),
+            () => this.errorMessage = "Fehlerhafte Anmeldedaten!"
+        );
+    }
 
 }

@@ -1,0 +1,16 @@
+de/quackr/persistence/entities/User_.class
+de/quackr/api/QuackController.class
+de/quackr/api/AuthenticationController.class
+de/quackr/api/IOController.class
+de/quackr/persistence/ExampleDataCreator.class
+de/quackr/api/AuthenticationController$LoginData.class
+de/quackr/api/UserController.class
+de/quackr/persistence/entities/User.class
+de/quackr/persistence/entities/Quack_.class
+de/quackr/auth/QuackRJWToken.class
+de/quackr/persistence/entities/Comment.class
+de/quackr/auth/DefaultRealm.class
+de/quackr/auth/QuackRJWTFilter.class
+de/quackr/persistence/entities/Comment_.class
+de/quackr/api/MainController.class
+de/quackr/persistence/entities/Quack.class

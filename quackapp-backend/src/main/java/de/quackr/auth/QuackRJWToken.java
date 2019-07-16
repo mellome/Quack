@@ -7,6 +7,7 @@ import com.nimbusds.jwt.SignedJWT;
 import org.apache.shiro.authc.AuthenticationToken;
 
 import java.text.ParseException;
+import java.util.Set;
 
 public class QuackRJWToken implements AuthenticationToken {
 
@@ -15,9 +16,12 @@ public class QuackRJWToken implements AuthenticationToken {
     private final String username;
     private final String token;
 
-    public QuackRJWToken(String username, String token) {
+    private final Set<String> roles;
+
+    public QuackRJWToken(String username, String token, Set<String> roles) {
         this.username = username;
         this.token = token;
+        this.roles = roles;
     }
 
     public boolean verify() {
@@ -47,5 +51,9 @@ public class QuackRJWToken implements AuthenticationToken {
 
     public String getToken() {
         return token;
+    }
+
+    public Set<String> getRoles() {
+        return roles;
     }
 }

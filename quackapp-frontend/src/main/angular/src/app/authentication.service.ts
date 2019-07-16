@@ -14,8 +14,7 @@ export class AuthenticationService {
     }
 
     requestToken(username: string, password: string): Observable<boolean> {
-
-        return this.httpClient.post(`${env.apiUrl}/auth`, {username, password}, {responseType: 'text'})
+      return this.httpClient.post(`${env.apiUrl}/auth`, {username, password}, {headers: this.getAuthHeaders(), responseType: 'text'})
             .pipe(map(obj => {
                 this.token = obj;
                 return true;

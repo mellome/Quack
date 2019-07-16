@@ -2,6 +2,7 @@ export class User {
     id: number;
     username: string;
     email: string;
+    passwordHash?: string;
     realName?: string;
     birthday?: Date;
     signUpTimestamp: Date;
@@ -21,6 +22,8 @@ export class User {
         if (object.realName !== undefined) user.realName = object.realName;
         if (object.birthday !== undefined) user.birthday = new Date(parseInt(object.birthday));
         if (object.lastActiveTimestamp !== undefined) user.lastActiveTimestamp = new Date(parseInt(object.lastActiveTimestamp));
+
+        if (object.passwordHash !== undefined) user.passwordHash = object.passwordHash;
         return user;
     }
 }

@@ -1,0 +1,15 @@
+/Users/mellome1992/LocalRepository/webtech2-blog/quackapp-backend/src/main/java/de/quackr/persistence/entities/Quack.java
+/Users/mellome1992/LocalRepository/webtech2-blog/quackapp-backend/src/main/java/de/quackr/api/MainController.java
+/Users/mellome1992/LocalRepository/webtech2-blog/quackapp-backend/src/main/java/de/quackr/auth/QuackRJWTFilter.java
+/Users/mellome1992/LocalRepository/webtech2-blog/quackapp-backend/src/main/java/de/quackr/api/AuthenticationController.java
+/Users/mellome1992/LocalRepository/webtech2-blog/quackapp-backend/src/main/java/de/quackr/auth/QuackRJWToken.java
+/Users/mellome1992/LocalRepository/webtech2-blog/quackapp-backend/src/main/java/de/quackr/persistence/entities/Comment.java
+/Users/mellome1992/LocalRepository/webtech2-blog/quackapp-backend/src/main/java/de/quackr/persistence/ExampleDataCreator.java
+/Users/mellome1992/LocalRepository/webtech2-blog/quackapp-backend/target/generated-sources/de/quackr/persistence/entities/Quack_.java
+/Users/mellome1992/LocalRepository/webtech2-blog/quackapp-backend/target/generated-sources/de/quackr/persistence/entities/User_.java
+/Users/mellome1992/LocalRepository/webtech2-blog/quackapp-backend/src/main/java/de/quackr/auth/DefaultRealm.java
+/Users/mellome1992/LocalRepository/webtech2-blog/quackapp-backend/src/main/java/de/quackr/api/IOController.java
+/Users/mellome1992/LocalRepository/webtech2-blog/quackapp-backend/src/main/java/de/quackr/api/UserController.java
+/Users/mellome1992/LocalRepository/webtech2-blog/quackapp-backend/target/generated-sources/de/quackr/persistence/entities/Comment_.java
+/Users/mellome1992/LocalRepository/webtech2-blog/quackapp-backend/src/main/java/de/quackr/api/QuackController.java
+/Users/mellome1992/LocalRepository/webtech2-blog/quackapp-backend/src/main/java/de/quackr/persistence/entities/User.java

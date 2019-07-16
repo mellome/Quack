@@ -5,6 +5,8 @@ import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jwt.JWTClaimsSet;
 import de.quackr.auth.QuackRJWToken;
 import de.quackr.persistence.entities.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
@@ -15,8 +17,13 @@ import javax.ws.rs.core.Response;
 import java.util.Date;
 import java.util.UUID;
 
+import static de.quackr.auth.DefaultRealm.ROLE_ADMIN;
+import static de.quackr.auth.DefaultRealm.ROLE_MODERATOR;
+
 @Path("/auth")
 public class AuthenticationController {
+
+    private Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
 
     @EJB
     IOController ioController;
@@ -24,9 +31,15 @@ public class AuthenticationController {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response authenticate(LoginData credentials) {
+        if (credentials == null || credentials.getUsername() == null || credentials.getPassword() == null) {
+            logger.debug("Received request to authenticate, but credentials are missing.");
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
+
         User user = ioController.getUser(credentials.getUsername());
 
-        if (!user.getPasswordHash().equals(credentials.getPassword())) {
+        if (user == null || !user.getPasswordHash().equals(credentials.getPassword())) {
+            logger.debug("Tried to authenticate, but received invalid credentials.");
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }
 
@@ -36,6 +49,7 @@ public class AuthenticationController {
         } catch (JOSEException ex) {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }
+        logger.debug("Successfully authenticated \"{}\"", credentials.username);
         return Response.ok(token).build();
     }
 
@@ -47,11 +61,10 @@ public class AuthenticationController {
         claimsSetBuilder.jwtID(UUID.randomUUID().toString());
 
         if (user.isAdmin()) {
-            claimsSetBuilder.claim("roles", "admin");
-        } else if (user.isModerator()) {
-            claimsSetBuilder.claim("roles", "moderator");
-        } else {
-            claimsSetBuilder.claim("roles", "user");
+            claimsSetBuilder.claim(ROLE_ADMIN, true);
+        }
+        if (user.isModerator()) {
+            claimsSetBuilder.claim(ROLE_MODERATOR, true);
         }
 
         final JWTClaimsSet claimsSet = claimsSetBuilder.build();
