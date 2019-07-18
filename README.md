@@ -18,4 +18,4 @@ Our project for "Webtechnologien 2".
 ### Viewing the application
 
 * **Angular frontend:** Open <http://localhost:8080/quackapp> in your browser.
-* **REST interface:** still missing?
+* **REST interface:** 
